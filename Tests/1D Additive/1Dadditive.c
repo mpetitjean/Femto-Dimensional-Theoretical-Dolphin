@@ -24,6 +24,7 @@ int main(){
 		ez[mm] = ez[mm] + (hy[mm] - hy[mm - 1]) * imp0;
 		
 		/* use additive source at node 50 */
+		/* added to field as equ 3.28 */
 		ez[50] += exp(-(qTime - 30.) * (qTime - 30.) / 100.);
 		
 		/* write snapshot if time a multiple of 10 */
