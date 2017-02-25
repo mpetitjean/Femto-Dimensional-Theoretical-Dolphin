@@ -65,7 +65,5 @@ else
   colormap(cmap);
   colorbar
 end  
-
-    
-end
+  
 return;

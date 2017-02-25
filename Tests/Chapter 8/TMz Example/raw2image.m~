@@ -1,4 +1,4 @@
-function raw2image(filename,z_norm,decades,cmap)
+function raw2image(filename,z_norm,decades,cmap,filename_out)
 % raw2image Creates a plot from a "raw" file.
 %
 % The absolute value of the data is used together with logarithmic
@@ -65,7 +65,10 @@ else
   colormap(cmap);
   colorbar
 end  
+  
+v = VideoWriter(filename_out);
 
+for i = 1:max(size(mov))
     
 end
 return;
