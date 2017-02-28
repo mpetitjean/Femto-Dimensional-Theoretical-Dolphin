@@ -67,6 +67,9 @@ while fid ~= -1
     axis([1 size_x 1 size_y]); caxis([0 1]); colorbar
   end
   
+  rectangle('Position',[30,0,10,50],'FaceColor', 'k','EdgeColor','k',...
+    'LineWidth',3)
+  
   % capture the frame for the movie (Matlab wants index to start
   % at 1, not zero, hence the addition of one to the frame)
   reel(frame+1) = getframe;

@@ -66,6 +66,7 @@ while fid ~= -1
     shading flat; axis equal;
     axis([1 size_x 1 size_y]); caxis([0 1]); colorbar
   end
+
   
   % capture the frame for the movie (Matlab wants index to start
   % at 1, not zero, hence the addition of one to the frame)

@@ -2,6 +2,9 @@
 #include "fdtd-alloc1.h"
 #include <math.h>
 
+#define LOSS 0.1          // Loss factor
+#define PERM 4.5          // Relative permittivity
+
 void gridInit(Grid *g) {
   double imp0 = 377.0;
   int mm, nn;
@@ -27,6 +30,12 @@ void gridInit(Grid *g) {
     for (nn = 0; nn < SizeY; nn++) {
       Ceze(mm, nn) = 1.0;
       Cezh(mm, nn) = Cdtds * imp0;
+
+      if (mm >= 30 && mm <= 40 && nn <= 50)
+      {
+        Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+        Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+      }
     }
 
   /* set magnetic-field update coefficients */
@@ -34,6 +43,12 @@ void gridInit(Grid *g) {
     for (nn = 0; nn < SizeY - 1; nn++) {
       Chxh(mm, nn) = 1.0;
       Chxe(mm, nn) = Cdtds / imp0;
+
+      // if (mm >= 30 && mm <= 40 && nn >= 30)
+      // {
+      //   Chxh(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+      //   Chxh(mm,nn) = Cdtds / PERM / (1.0 + LOSS); * imp0;
+      // }
     }
 
   for (mm = 0; mm < SizeX - 1; mm++)
