@@ -7,7 +7,7 @@ v = VideoWriter(filename_out);
 
 sat = size(mov(1).cdata);
 for i = 2:max(size(mov))
-    mov(i).cdata = mov(i).cdata(:,end-sat(2)+1:end,:);
+    mov(i).cdata = mov(i).cdata(1:sat(1),1:sat(2),:);
 end
 
 open(v)

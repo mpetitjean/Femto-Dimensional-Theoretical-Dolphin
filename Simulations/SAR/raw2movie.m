@@ -69,8 +69,8 @@ while fid ~= -1
   %{
                     INSERER BRAIN
   %}
-  rectangle('Position',[48.5,38,4,5],'Curvature', [1 1],'FaceColor', 'k','EdgeColor','k',...
-    'LineWidth',3)
+  rectangle('Position',[48,35,10,12],'Curvature', [1 1],'EdgeColor','k',...
+    'LineWidth',1)
   
   % capture the frame for the movie (Matlab wants index to start
   % at 1, not zero, hence the addition of one to the frame)
