@@ -13,8 +13,6 @@ void ezIncInit(Grid *g){
 
 /* calculate source function at given time and location */
 double ezInc(double time, double location) {
-  double arg;
-
   if (ppw <= 0) {
     fprintf(stderr,
        "ezInc: ezIncInit() must be called before ezInc.\n"
