@@ -2,7 +2,7 @@
 #include "fdtd-alloc1.h"
 #include <math.h>
 
-#define LOSS 0.01          // Loss factor
+#define LOSS 0.1328         // Loss factor
 #define PERM 43          // Relative permittivity
 
 void gridInit(Grid *g) {
