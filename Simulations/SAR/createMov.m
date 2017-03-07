@@ -1,7 +1,7 @@
   
 filename = input('Enter the basename of input files : ', 's');
 filename_out = input('Enter the name of output movies : ', 's');
-mov = raw2movie(filename);
+mov = raw2movie(filename,1,5);
 
 v = VideoWriter(filename_out);
 

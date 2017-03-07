@@ -3,7 +3,7 @@
 #include <math.h>
 
 #define LOSS 0.01785          // Loss factor
-#define PERM 43          // Relative permittivity
+#define PERM 43               // Relative permittivity
 
 void gridInit(Grid *g) {
   double imp0 = 377.0;
@@ -15,7 +15,7 @@ void gridInit(Grid *g) {
   Type = tmZGrid;                          /*@ \label{gridtmzA} @*/
   SizeX = 201;             // x size of domain
   SizeY = 201;              // y size of domain
-  MaxTime = 400;           // duration of simulation
+  MaxTime = 200;           // duration of simulation
   Cdtds = 1.0 / sqrt(2.0); // Courant number
 
   ALLOC_2D(g->hx,   SizeX, SizeY - 1, double);  /*@ \label{gridtmzB} @*/
