@@ -2,7 +2,6 @@
 #include "fdtd-alloc1.h"
 #include <math.h>
 
-<<<<<<< HEAD
 #define LOSS 0.01785          // Loss factor
 #define PERM 43          // Relative permittivity
 
@@ -14,7 +13,6 @@ void gridInit(Grid *g) {
   double l, L, xLocation, yLocation, xCenter, yCenter, l2, L2;
 
   Type = tmZGrid;                          /*@ \label{gridtmzA} @*/
-<<<<<<< HEAD
   SizeX = 201;             // x size of domain
   SizeY = 201;              // y size of domain
   MaxTime = 400;           // duration of simulation
@@ -31,7 +29,6 @@ void gridInit(Grid *g) {
   ALLOC_2D(g->cezh, SizeX, SizeY, double);    /*@ \label{gridtmzC} @*/
  
   /* set electric-field update coefficients */
-<<<<<<< HEAD
   l = 29;
   L = 35;
   l2 = l * l;
