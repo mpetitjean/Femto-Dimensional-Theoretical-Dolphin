@@ -69,6 +69,7 @@ while fid ~= -1
   %{
                     INSERER BRAIN
   %}
+<<<<<<< HEAD
   rectangle('Position',[86,83,29,35],'Curvature', [1 1],'FaceColor', 'k','EdgeColor','k',...
     'LineWidth',3)
   
