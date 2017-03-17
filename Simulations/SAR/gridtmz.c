@@ -2,7 +2,7 @@
 #include "fdtd-alloc1.h"
 #include <math.h>
 
-#define LOSS 0.01785          // Loss factor
+#define LOSS 0.01726          // Loss factor
 #define PERM 43               // Relative permittivity
 
 void gridInit(Grid *g) {
@@ -10,7 +10,7 @@ void gridInit(Grid *g) {
   int mm, nn;
 
 /* terms for the elliptic brain */
-  double l, L, xLocation, yLocation, xCenter, yCenter, l2, L2;
+  //double l, L, xLocation, yLocation, xCenter, yCenter, l2, L2;
 
   Type = tmZGrid;                          /*@ \label{gridtmzA} @*/
   SizeX = 201;             // x size of domain
@@ -29,7 +29,7 @@ void gridInit(Grid *g) {
   ALLOC_2D(g->cezh, SizeX, SizeY, double);    /*@ \label{gridtmzC} @*/
  
   /* set electric-field update coefficients */
-  l = 29;
+  /*l = 29;
   L = 35;
   l2 = l * l;
   L2 = L * L;
@@ -50,6 +50,19 @@ void gridInit(Grid *g) {
       }
     }
   }
+  */
+  for (mm = 0; mm < SizeX; mm++)
+    for (nn = 0; nn < SizeY; nn++) {
+      Ceze(mm, nn) = 1.0;
+      Cezh(mm, nn) = Cdtds * imp0;
+
+      if (!(mm < SizeX/2))
+      {
+        Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+        Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+      }
+    }
+  
   /* set magnetic-field update coefficients */
   for (mm = 0; mm < SizeX; mm++)
     for (nn = 0; nn < SizeY - 1; nn++) {

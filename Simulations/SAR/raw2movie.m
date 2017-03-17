@@ -70,9 +70,9 @@ while fid ~= -1
                     INSERER BRAIN
   %}
 
-  rectangle('Position',[86,83,29,35],'Curvature', [1 1],'EdgeColor','k',...
-    'LineWidth',1)
-  
+  %rectangle('Position',[86,83,29,35],'Curvature', [1 1],'EdgeColor','k',...
+  %  'LineWidth',1)
+  line([100 100],[0 201],'Color','b','LineWidth',1,'LineStyle','-')
   % capture the frame for the movie (Matlab wants index to start
   % at 1, not zero, hence the addition of one to the frame)
   reel(frame+1) = getframe;
