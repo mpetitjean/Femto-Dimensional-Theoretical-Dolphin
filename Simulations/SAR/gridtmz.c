@@ -53,34 +53,41 @@ void gridInit(Grid *g) {
   */
   for (mm = 0; mm < SizeX; mm++)
     for (nn = 0; nn < SizeY; nn++) {
-      Ceze(mm, nn) = 1.0;
-      Cezh(mm, nn) = Cdtds * imp0;
-
-      if (!(mm < SizeX/2))
-      {
-        Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-        Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
-      }
+      	Ceze(mm, nn) = 1.0;
+      	Cezh(mm, nn) = Cdtds * imp0;
+      	if (!(mm < SizeX/2))
+      	{
+        	Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+        	Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+      	}
     }
   
   /* set magnetic-field update coefficients */
   for (mm = 0; mm < SizeX; mm++)
     for (nn = 0; nn < SizeY - 1; nn++) {
-      Chxh(mm, nn) = 1.0;
-      Chxe(mm, nn) = Cdtds / imp0;
+    	Chxh(mm, nn) = 1.0;
+    	Chxe(mm, nn) = Cdtds / imp0;
+     	if (!(mm < SizeX/2))
+    	{
+      	Chxh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
+     		Chxe(mm, nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+    	}
+  		// if (mm >= 30 && mm <= 40 && nn >= 30)
+  		// {
+  		//   Chxh(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+    	//   Chxh(mm,nn) = Cdtds / PERM / (1.0 + LOSS); * imp0;
+    	// }
+  	}
 
-      // if (mm >= 30 && mm <= 40 && nn >= 30)
-      // {
-      //   Chxh(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-      //   Chxh(mm,nn) = Cdtds / PERM / (1.0 + LOSS); * imp0;
-      // }
-    }
-
-  for (mm = 0; mm < SizeX - 1; mm++)
+	for (mm = 0; mm < SizeX - 1; mm++)
     for (nn = 0; nn < SizeY; nn++) {
       Chyh(mm, nn) = 1.0;
       Chye(mm, nn) = Cdtds / imp0;
+    	if (!(mm < SizeX/2))
+    	{
+      	Chyh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
+     		Chye(mm, nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+    	}
     }
-
   return;
 }
