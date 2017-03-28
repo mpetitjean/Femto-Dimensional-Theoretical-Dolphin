@@ -10,7 +10,7 @@ void gridInit(Grid *g) {
   int mm, nn;
 
 /* terms for the elliptic brain */
-  //double l, L, xLocation, yLocation, xCenter, yCenter, l2, L2;
+  double l, L, xLocation, yLocation, xCenter, yCenter, l2, L2;
 
   Type = tmZGrid;                          /*@ \label{gridtmzA} @*/
   SizeX = 201;             // x size of domain
@@ -29,7 +29,7 @@ void gridInit(Grid *g) {
   ALLOC_2D(g->cezh, SizeX, SizeY, double);    /*@ \label{gridtmzC} @*/
  
   /* set electric-field update coefficients */
-  /*l = 29;
+  l = 29;
   L = 35;
   l2 = l * l;
   L2 = L * L;
@@ -44,30 +44,21 @@ void gridInit(Grid *g) {
       Cezh(mm, nn) = Cdtds * imp0;
 
       if (xLocation * xLocation / l2 + yLocation * yLocation / L2 < 0.25)
-      {
-        Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-        Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
-      }
+     	{
+      	Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+      	Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+    	}
     }
   }
-  */
-  for (mm = 0; mm < SizeX; mm++)
-    for (nn = 0; nn < SizeY; nn++) {
-      	Ceze(mm, nn) = 1.0;
-      	Cezh(mm, nn) = Cdtds * imp0;
-      	if (!(mm < SizeX/2))
-      	{
-        	Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-        	Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
-      	}
-    }
   
   /* set magnetic-field update coefficients */
-  for (mm = 0; mm < SizeX; mm++)
-    for (nn = 0; nn < SizeY - 1; nn++) {
+  for (mm = 0; mm < SizeX; mm++){
+    xLocation = mm - xCenter;
+    for (nn = 0; nn < SizeY; nn++) {
+      yLocation = nn - yCenter;
     	Chxh(mm, nn) = 1.0;
     	Chxe(mm, nn) = Cdtds / imp0;
-     	if (!(mm < SizeX/2))
+     	if (xLocation * xLocation / l2 + yLocation * yLocation / L2 < 0.25)
     	{
       	Chxh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
      		Chxe(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
@@ -78,16 +69,20 @@ void gridInit(Grid *g) {
     	//   Chxh(mm,nn) = Cdtds / PERM / (1.0 + LOSS); * imp0;
     	// }
   	}
+  }
 
-	for (mm = 0; mm < SizeX - 1; mm++)
+	for (mm = 0; mm < SizeX; mm++){
+    xLocation = mm - xCenter;
     for (nn = 0; nn < SizeY; nn++) {
+      yLocation = nn - yCenter;
       Chyh(mm, nn) = 1.0;
       Chye(mm, nn) = Cdtds / imp0;
-    	if (!(mm < SizeX/2))
+    	if (xLocation * xLocation / l2 + yLocation * yLocation / L2 < 0.25)
     	{
       	Chyh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
      		Chye(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
     	}
     }
+  }
   return;
 }
