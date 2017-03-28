@@ -70,7 +70,7 @@ void gridInit(Grid *g) {
      	if (!(mm < SizeX/2))
     	{
       	Chxh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
-     		Chxe(mm, nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+     		Chxe(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
     	}
   		// if (mm >= 30 && mm <= 40 && nn >= 30)
   		// {
@@ -86,7 +86,7 @@ void gridInit(Grid *g) {
     	if (!(mm < SizeX/2))
     	{
       	Chyh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
-     		Chye(mm, nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+     		Chye(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
     	}
     }
   return;
