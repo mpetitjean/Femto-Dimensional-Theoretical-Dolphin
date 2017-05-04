@@ -2,7 +2,7 @@
 #include "fdtd-alloc1.h"
 #include <math.h>
 
-#define LOSS 0.01933          // Loss factor
+#define LOSS 0.01934          // Loss factor
 #define PERM 43               // Relative permittivity
 
 void gridInit(Grid *g) {
@@ -15,7 +15,7 @@ void gridInit(Grid *g) {
   Type = tmZGrid;                          /*@ \label{gridtmzA} @*/
   SizeX = 201;             // x size of domain
   SizeY = 201;              // y size of domain
-  MaxTime = 200;           // duration of simulation
+  MaxTime = 10000;           // duration of simulation
   Cdtds = 1.0 / sqrt(2.0); // Courant number
 
   ALLOC_2D(g->hx,   SizeX, SizeY - 1, double);  /*@ \label{gridtmzB} @*/
@@ -43,11 +43,11 @@ void gridInit(Grid *g) {
       Ceze(mm, nn) = 1.0;
       Cezh(mm, nn) = Cdtds * imp0;
 
-      if (xLocation * xLocation / l2 + yLocation * yLocation / L2 < 0.25)
-     	{
-      	Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-      	Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
-    	}
+      if (mm >= (SizeX-1)/2)
+        {
+        Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+        Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
+        }
     }
   }
   
@@ -56,32 +56,32 @@ void gridInit(Grid *g) {
     xLocation = mm - xCenter;
     for (nn = 0; nn < SizeY; nn++) {
       yLocation = nn - yCenter;
-    	Chxh(mm, nn) = 1.0;
-    	Chxe(mm, nn) = Cdtds / imp0;
-     	if (xLocation * xLocation / l2 + yLocation * yLocation / L2 < 0.25)
-    	{
-      	Chxh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
-     		Chxe(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
-    	}
-  		// if (mm >= 30 && mm <= 40 && nn >= 30)
-  		// {
-  		//   Chxh(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-    	//   Chxh(mm,nn) = Cdtds / PERM / (1.0 + LOSS); * imp0;
-    	// }
-  	}
+        Chxh(mm, nn) = 1.0;
+        Chxe(mm, nn) = Cdtds / imp0;
+        // if (mm >= SizeX/2)
+        // {
+        //     Chxh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
+        //     Chxe(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
+        // }
+        // if (mm >= 30 && mm <= 40 && nn >= 30)
+        // {
+        //   Chxh(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
+        //   Chxh(mm,nn) = Cdtds / PERM / (1.0 + LOSS); * imp0;
+        // }
+    }
   }
 
-	for (mm = 0; mm < SizeX; mm++){
+    for (mm = 0; mm < SizeX; mm++){
     xLocation = mm - xCenter;
     for (nn = 0; nn < SizeY; nn++) {
       yLocation = nn - yCenter;
       Chyh(mm, nn) = 1.0;
       Chye(mm, nn) = Cdtds / imp0;
-    	if (xLocation * xLocation / l2 + yLocation * yLocation / L2 < 0.25)
-    	{
-      	Chyh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
-     		Chye(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
-    	}
+        // if (mm >= SizeX/2)
+        // {
+        //     Chyh(mm, nn) = (1.0 - LOSS) / (1.0 + LOSS);
+        //     Chye(mm, nn) = Cdtds / imp0 / (1.0 + LOSS);
+        // }
     }
   }
   return;

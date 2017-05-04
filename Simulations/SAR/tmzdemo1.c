@@ -21,7 +21,7 @@ int main()
     updateH2d(g);     // update magnetic field
     updateE2d(g);     // update electric field
     // source at the left
-    Ez(80, SizeY/2) = ezInc(Time, 0.0); 
+    Ez(40, SizeY/2) = ezInc(Time, 0.0); 
     abc(g);
     snapshot2d(g);    // take a snapshot (if appropriate)
   } // end of time-stepping
