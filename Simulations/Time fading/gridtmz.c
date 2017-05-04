@@ -7,9 +7,9 @@ void gridInit(Grid *g) {
   int mm, nn;
 
   Type = tmZGrid;                          /*@ \label{gridtmzA} @*/
-  SizeX = 101;             // x size of domain
-  SizeY = 81;              // y size of domain
-  MaxTime = 230;           // duration of simulation
+  SizeX = 500;             // x size of domain
+  SizeY = 500;              // y size of domain
+  MaxTime = 4500;           // duration of simulation
   Cdtds = 1.0 / sqrt(2.0); // Courant number
 
   ALLOC_2D(g->hx,   SizeX, SizeY - 1, double);  /*@ \label{gridtmzB} @*/

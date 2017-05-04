@@ -32,8 +32,8 @@ void snapshotInit2d(Grid *g) {
 
   // hardcode so that you don't copy everytime
 
-  startTime = 10;
-  temporalStride = 1;
+  startTime = 50;
+  temporalStride = 50;
   startNodeX = 0;
   endNodeX = SizeX-1;
   spatialStrideX = 1;

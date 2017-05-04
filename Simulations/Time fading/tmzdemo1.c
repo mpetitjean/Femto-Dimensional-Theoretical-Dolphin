@@ -21,7 +21,7 @@ int main()
     updateE2d(g);     // update electric field
 
     // source at the left
-    Ez(0, SizeY / 2) = ezInc(Time, 0.0); 
+    Ez(SizeX / 2, SizeY / 2) = ezInc(Time, 0.0); 
     snapshot2d(g);    // take a snapshot (if appropriate)
   } // end of time-stepping
 
