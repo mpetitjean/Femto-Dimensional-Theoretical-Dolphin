@@ -10,9 +10,9 @@ void gridInit(Grid *g) {
   int mm, nn;
 
   Type = tmZGrid;                          /*@ \label{gridtmzA} @*/
-  SizeX = 101;             // x size of domain
-  SizeY = 81;              // y size of domain
-  MaxTime = 230;           // duration of simulation
+  SizeX = 200;             // x size of domain
+  SizeY = 100;              // y size of domain
+  MaxTime = 500;           // duration of simulation
   Cdtds = 1.0 / sqrt(2.0); // Courant number
 
   ALLOC_2D(g->hx,   SizeX, SizeY - 1, double);  /*@ \label{gridtmzB} @*/
@@ -30,12 +30,6 @@ void gridInit(Grid *g) {
     for (nn = 0; nn < SizeY; nn++) {
       Ceze(mm, nn) = 1.0;
       Cezh(mm, nn) = Cdtds * imp0;
-
-      if (mm >= 30 && mm <= 40 && nn <= 50)
-      {
-        Ceze(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-        Cezh(mm,nn) = imp0 / PERM / (1.0 + LOSS) * Cdtds;
-      }
     }
 
   /* set magnetic-field update coefficients */
@@ -43,12 +37,6 @@ void gridInit(Grid *g) {
     for (nn = 0; nn < SizeY - 1; nn++) {
       Chxh(mm, nn) = 1.0;
       Chxe(mm, nn) = Cdtds / imp0;
-
-      // if (mm >= 30 && mm <= 40 && nn >= 30)
-      // {
-      //   Chxh(mm,nn) = (1.0 - LOSS) / (1.0 + LOSS);
-      //   Chxh(mm,nn) = Cdtds / PERM / (1.0 + LOSS); * imp0;
-      // }
     }
 
   for (mm = 0; mm < SizeX - 1; mm++)

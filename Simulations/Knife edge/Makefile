@@ -5,30 +5,30 @@
 #
 ##########################################################
 MAINSRC=tmzdemo1.c 
-SRC=${MAINSRC} ricker.c gridtmz.c snapshot2d.c updatetmz.c abctmz.c
+SRC=${MAINSRC} harmonic.c gridtmz.c snapshot2d.c updatetmz.c abctmz.c
 OFILES=${SRC:.c=.o}
 EXE=${MAINSRC:.c=}
 
 MAINSRC2=tmzdemo2.c 
-SRC2=${MAINSRC2} ricker.c gridtmzpec.c grid1dez.c snapshot2d.c\
+SRC2=${MAINSRC2} harmonic.c gridtmzpec.c grid1dez.c snapshot2d.c\
 	updatetmz.c tfsftmz.c abctmz.c
 OFILES2=${SRC2:.c=.o}
 EXE2=${MAINSRC2:.c=}
 
 MAINSRC3=tmzdemo2-live1d.c 
-SRC3=${MAINSRC3} ricker.c gridtmz.c grid1dez.c snapshot2d.c\
+SRC3=${MAINSRC3} harmonic.c gridtmz.c grid1dez.c snapshot2d.c\
 	snapshot1d-live.c updatetmz.c tfsftmz.c
 OFILES3=${SRC3:.c=.o}
 EXE3=${MAINSRC3:.c=}
 
 MAINSRC4=tmzdemo2-no-abc.c 
-SRC4=${MAINSRC4} ricker.c gridtmz.c grid1dez.c snapshot2d.c\
+SRC4=${MAINSRC4} harmonic.c gridtmz.c grid1dez.c snapshot2d.c\
 	snapshot1d-live.c updatetmz.c tfsftmz.c
 OFILES4=${SRC4:.c=.o}
 EXE4=${MAINSRC4:.c=}
 
 MAINSRC5=tezdemo.c 
-SRC5=${MAINSRC5} rickertez.c abctez.c gridtezpec.c snap2dhz.c\
+SRC5=${MAINSRC5} harmonictez.c abctez.c gridtezpec.c snap2dhz.c\
 	updatetez.c grid1dhz.c tfsftez.c
 OFILES5=${SRC5:.c=.o}
 EXE5=${MAINSRC5:.c=}
@@ -90,8 +90,8 @@ grid1dhz.o: fdtd-macro-tez.h fdtd-grid1.h fdtd-alloc1.h
 gridtezpec.o: fdtd-macro-tez.h fdtd-grid1.h fdtd-alloc1.h
 gridtmz.o: fdtd-macro-tmz.h fdtd-grid1.h fdtd-alloc1.h
 gridtmzpec.o: fdtd-macro-tmz.h fdtd-grid1.h fdtd-alloc1.h
-ricker.o: ezinc.h fdtd-macro-tmz.h fdtd-grid1.h
-rickertez.o: ezinc.h fdtd-macro-tmz.h fdtd-grid1.h
+harmonic.o: ezinc.h fdtd-macro-tmz.h fdtd-grid1.h
+harmonictez.o: ezinc.h fdtd-macro-tmz.h fdtd-grid1.h
 snap2dhz.o: fdtd-macro-tez.h fdtd-grid1.h
 snapshot1d-live.o: fdtd-macro-tmz.h fdtd-grid1.h
 snapshot2d.o: fdtd-macro-tmz.h fdtd-grid1.h
