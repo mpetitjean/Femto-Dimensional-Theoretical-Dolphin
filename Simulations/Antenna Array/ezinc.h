@@ -7,6 +7,6 @@
 #include "fdtd-macro-tmz.h"
 
 void ezIncInit(Grid *g); 
-double ezInc(double time, double location);
+double ezInc(double time, double location, double dphi);
 
 #endif

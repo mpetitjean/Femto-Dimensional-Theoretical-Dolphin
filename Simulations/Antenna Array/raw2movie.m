@@ -67,12 +67,12 @@ while fid ~= -1
     axis([1 size_x 1 size_y]); caxis([0 1]); colorbar
   end
   hold on;
-  r = 130;
-  theta = -pi/3:pi/64:pi/3;
+  r = 330;
+  theta = -pi/4:pi/64:pi/4;
   x = round(r*cos(theta));
   y = round(r*sin(theta));
-  centerX = 10;
-  centerY = 100;
+  centerX = -10;
+  centerY = 250;
   plot(centerX+x, centerY+y, 'Color', 'k');
  
  

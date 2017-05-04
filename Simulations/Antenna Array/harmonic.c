@@ -12,7 +12,7 @@ void ezIncInit(Grid *g){
 }
 
 /* calculate source function at given time and location */
-double ezInc(double time, double location) {
+double ezInc(double time, double location, double dphi) {
   if (ppw <= 0) {
     fprintf(stderr,
        "ezInc: ezIncInit() must be called before ezInc.\n"
@@ -20,5 +20,5 @@ double ezInc(double time, double location) {
     exit(-1);
   }
 
-  return cos(2 * M_PI * (cdtds * time - location)/ppw);
+  return cos(2 * M_PI * (cdtds * time - location)/ppw + dphi);
 }

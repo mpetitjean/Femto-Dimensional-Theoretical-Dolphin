@@ -15,7 +15,9 @@ int main()
   abcInit(g);
   ezIncInit(g);
   snapshotInit2d(g);  // initialize snapshots
-  int shift = 5;
+  int shift = 3;
+  double dphi = 0.3273;
+  //double dphi = 0.9425;
   /* do time stepping */
   for (Time = 0; Time < MaxTime; Time++) {
     updateH2d(g);     // update magnetic field
@@ -23,10 +25,10 @@ int main()
 
     // sources
     // For a broadside array (chap6 p5), delta = 0
-    Ez(10, SizeY/2-shift/2) = ezInc(Time, 0.0);
-    Ez(10, SizeY/2+shift/2) = ezInc(Time, 0.0); 
-    Ez(10, SizeY/2+3*shift/2) = ezInc(Time, 0.0); 
-    Ez(10, SizeY/2-3*shift/2) = ezInc(Time, 0.0);  
+    Ez(10, SizeY/2-shift/2) = ezInc(Time, 0.0, dphi);
+    Ez(10, SizeY/2+shift/2) = ezInc(Time, 0.0, 2*dphi); 
+    Ez(10, SizeY/2+3*shift/2) = ezInc(Time, 0.0, 3*dphi); 
+    Ez(10, SizeY/2-3*shift/2) = ezInc(Time, 0.0, 0.0);  
     abc(g);
     snapshot2d(g);    // take a snapshot (if appropriate)
   } // end of time-stepping
