@@ -1,0 +1,45 @@
+When implementing the previous update equation in a program, one needs to investigate the value assigned to the extreme values of the grid, because these cannot be updated through the update equations. For example, when computing $E_z^{n+1} \left[ 0,0 \right]$, the value $H_y^{n+\frac{1}{2}} \left[ 0 , - \frac{1}{2} \right ]$ is not available.
+
+One basic approach is to impose the electric field to be zero on the boundaries of the grid. Physically, a region where the electric field is always zero is a perfect electric conductor. Any incoming electromagnetic wave on such a conductor will be totally reflected. This can be a wanted behaviour in some simulations, but absorbing boundaries must be implemented in order to simulate an infinite environment. 
+
+Since the update equations cannot be used, the following reasoning is based on the wave equation that governs the propagation of the electric field:
+
+\begin{equation}
+    \left( \frac{\partial^2}{\partial x^2} - \mu \epsilon \frac{\partial ^2}{\partial t^2} \right) E_z =  \left( \frac{\partial}{\partial x} - \sqrt{\mu \epsilon} \frac{\partial}{\partial t} \right) \left( \frac{\partial}{\partial x} + \sqrt{\mu \epsilon} \frac{\partial}{\partial t} \right)E_z = 0
+\end{equation}
+
+This equation will be discretized around the point $(x,t) = \left(\frac{\Delta x}{2}, (n+\frac{1}{2}) \Delta t\right)$. The electrical field was defined on integer values of spatial indexes, so that $E_z^n\left[\frac{1}{2}\right]$ will be approximated by $(E_z^n\left[0\right] + E_z^n\left[1\right])/2$. In the following equations, a compact notation has been introduced for readability. $I$ denotes the identity operator, $\sigma_t$ is a time shift and $\sigma_x$ is a spatial shift.
+
+\begin{equation}
+	\left.\frac{\partial E_z}{\partial t}\right|_{\left(\frac{\Delta x}{2}, (n+\frac{1}{2}) \Delta t\right)} = \frac{\frac{E_z^{n+1} \left[0\right] + E_z^{n+1} \left[1\right]}{2} - \frac{E_z^{n} \left[0\right] + E_z^{n} \left[1\right]}{2}}{\Delta t} =  \left( \frac{I - \sigma_t^{-1}}{\Delta t} \right) \left( \frac{I + \sigma_x^{1}}{2}\right) E_z^{n+1} \left[0\right]	
+\end{equation}
+
+\begin{equation}
+\left.\frac{\partial E_z}{\partial x}\right|_{\left(\frac{\Delta x}{2}, (n+\frac{1}{2}) \Delta t\right)} = \frac{\frac{E_z^{n+1} \left[1\right] + E_z^{n} \left[1\right]}{2} - \frac{E_z^{n+1} \left[0\right] + E_z^{n} \left[0\right]}{2}}{\Delta x} =  \left( \frac{\sigma_x^{1} - I}{\Delta x} \right) \left( \frac{I + \sigma_t^{-1}}{2}\right) E_z^{n+1} \left[0\right]	
+\end{equation}
+
+The wave equation can thus be rewritten in operator form, and the advection operator $\boldsymbol{A}$ is defined.
+
+\begin{equation}
+	\left \{
+	\left( \frac{\sigma_x^{1} - I}{\Delta x} \right) \left( \frac{I + \sigma_t^{-1}}{2}\right)  - \sqrt{\mu \epsilon}\left( \frac{I - \sigma_t^{-1}}{\Delta t} \right) \left( \frac{I + \sigma_x^{1}}{2}\right)
+	\right\} E_z^{n+1} \left[0\right] = \boldsymbol{A} E_z^{n+1}[0] = 0
+	\label{eq:abc1}
+\end{equation}
+
+The update equation provided by (\ref{eq:abc1}) is approximate. Better results are obtained when using a second order equation, which means that the advection operator is applied twice. This way, a long but often accurate update equation can be deduced.
+
+\begin{equation}
+	\boldsymbol{A} \boldsymbol{A} E_z^{n+1} = 0
+\end{equation}
+
+\begin{equation}
+\begin{aligned}[rl]
+	E_z^{n+1} \left[0\right] = &\frac{-1}{1/S_c^{'} + 2 + S_c^{'}} \{ (1/S_c^{'} - 2 + S_c^{'}) \left[ E_z^{n+1} \left[2\right] + E_z^{n-1} \left[0\right] \right]  \\
+	 & + 2 ( S_c^{'} - 1/ S_c^{'}) \left[ E_z^{n} \left[0\right]  + E_z^{n} \left[2\right] - E_z^{n+1} \left[1\right] - E_z^{n-1} \left[1\right]\right] \\
+	 & -4 (1/S_c^{'} + S_c^{'}) E_z^{n} \left[1\right] \} - E_z^{n-1} \left[2\right]
+\end{aligned}
+\label{eq:abc2}
+\end{equation}
+
+The update equation (\ref{eq:abc2}) is expressed as a function of $S_c^{'} = \Delta t / (\sqrt{\mu \epsilon} \Delta x) = S_c /\sqrt{\mu_r \epsilon_r} $, where $S_c = c \Delta t / \Delta x$ is the Courant number. The boundary equation was derived here for the left boundary of the grid but can be similarly found for each boundary. Being a second order equation, two spatial samples are needed as well as samples that are two time steps old. This is to be taken into account during the implementation, where such samples should be stored in memory.

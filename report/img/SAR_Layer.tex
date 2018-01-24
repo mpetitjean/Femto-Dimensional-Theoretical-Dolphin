@@ -1,0 +1,98 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=.85\textwidth,
+height=0.4\textheight,
+at={(1.85in,0.787in)},
+scale only axis,
+xmin=0,
+xmax=0.2,
+xlabel style={font=\color{white!15!black}},
+xlabel={$x$},
+ymin=-0.025,
+ymax=0.025,
+x unit=\meter,
+y unit=\volt\per\meter,
+ylabel style={font=\color{white!15!black}},
+ylabel={Amplitude},
+axis background/.style={fill=white},
+legend style={legend cell align=left, align=left, draw=white!15!black},
+cycle list name=exotic
+]
+\addplot +[mark=none]
+  table[row sep=crcr]{%
+0	-0.0206215623766184\\
+0.0048	-0.00400005327537656\\
+0.0096	0.00895441230386496\\
+0.0144	0.0147783989086747\\
+0.0192	0.0135911516845226\\
+0.024	0.00795684102922678\\
+0.0288	0.00122943427413702\\
+0.0336	-0.00387582601979375\\
+0.0384	-0.00604807445779443\\
+0.0432	-0.00541533064097166\\
+0.048	-0.00305921630933881\\
+0.0528	-0.00034056868753396\\
+0.0576	0.00166755903046578\\
+0.0624	0.00247167865745723\\
+0.0672	0.00215531722642481\\
+0.072	0.00117303093429655\\
+0.0768	7.60863622417673e-05\\
+0.0816	-0.000712213863153011\\
+0.0864	-0.00100722454953939\\
+0.0912	-0.000855342776048928\\
+0.096	-0.000446949736215174\\
+0.1008	-5.01012664244627e-06\\
+0.1056	0.000303802691632882\\
+0.1104	0.000410887936595827\\
+0.1152	0.00034001498715952\\
+0.1248	-7.0996570684656e-06\\
+0.1296	-0.000127802442875691\\
+0.1344	-0.000166159152286127\\
+0.1392	-0.000133765337523073\\
+0.1488	7.6911055657547e-06\\
+0.1536	5.47617491974961e-05\\
+0.1584	6.82763347867876e-05\\
+0.1632	5.37084160896484e-05\\
+0.1776	-2.21494956349488e-05\\
+0.1872	-2.03437175514409e-05\\
+0.2016	1.01238993011066e-05\\
+};
+
+\filldraw [fill=red, draw=black, thick] (axis cs:0.0144,0.0147783989086747) circle [radius=2pt] node [label={[inner sep=1pt, fill=white,text=black, fill opacity=0.75, text opacity=1]above right:$(0.014, 0.0148)$}] {};
+\filldraw [fill=red, draw=black, thick] (axis cs:0.0624,0.00247167865745723) circle [radius=2pt] node [label={[inner sep=1pt, fill=white,text=black, fill opacity=0.75, text opacity=1]above right:$(0.062, 0.0025)$}] {};
+\addlegendentry{$E_z(x,100,t')$}
+
+\addlegendentry{$\num{0.024}e^{\num{-35}x}$}
+
+\addplot +[mark=none]
+  table[row sep=crcr]{%
+0	0.02445\\
+0.01	0.017184884957449\\
+0.02	0.0120785386912375\\
+0.03	0.0084895009350926\\
+0.04	0.00596691602927291\\
+0.05	0.00419389634003325\\
+0.06	0.00294771477001793\\
+0.07	0.00207182573456569\\
+0.08	0.00145619987322673\\
+0.09	0.00102350213891425\\
+0.1	0.00071937695341287\\
+0.11	0.000505620048484257\\
+0.12	0.000355379237847925\\
+0.13	0.000249781240027919\\
+0.14	0.000175560812859243\\
+0.15	0.000123394371043861\\
+0.17	6.09580239236962e-05\\
+0.19	3.01138589162975e-05\\
+0.2	2.11657750961713e-05\\
+};
+\end{axis}
+\end{tikzpicture}%

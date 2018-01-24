@@ -1,0 +1,120 @@
+\documentclass[12pt,english]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{setspace}
+\usepackage{siunitx}
+\usepackage{minted}
+\usepackage{todonotes}
+\geometry{
+a4paper,
+left=25mm,
+right=25mm,
+top=25mm,
+bottom=25mm,
+}
+\usepackage{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{units}
+\usepackage{standalone}
+\usepackage{tikzscale}
+\makeatletter
+\pgfplotsset{
+  unit code/.code 2 args=
+    \begingroup
+    \protected@edef\x{\endgroup\si{#2}}\x
+}
+\makeatother
+\renewcommand{\baselinestretch}{1.1} 
+\newcommand{\Hvec}{\vec{H}}
+\newcommand{\Evec}{\vec{E}}
+\renewenvironment{cases}
+{ \left\{\begin{aligned} }
+{ \end{aligned}\right. }
+\renewcommand{\epsilon}{\varepsilon}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\begin{titlepage}
+	{\setstretch{1.0}
+
+\includegraphics[width=\textwidth]{img/Logos.pdf} \hspace{4.5cm}
+
+\vspace{1 cm}
+\large
+
+\begin{tabular}{lr}
+\begin{minipage}[t]{0.5\textwidth}
+{\small\textsc{Brussels Faculty of Enginering} \\[1ex]
+Université Libre de Bruxelles\\[1ex]
+Vrije Universiteit van Brussel\\[1ex]}
+\end{minipage} & \begin{minipage}[t]{0.45\textwidth}
+\begin{flushright}
+{\small Academic Year 2016-2017}
+\end{flushright}
+\end{minipage}
+\end{tabular}
+
+\vspace{\stretch{2}}
+\begin{center}
+\Large 
+\textbf{Project Report} \\Numerical resolution of the Maxwell equations using the Finite-Difference Time-Domain method\\
+\vspace{3 cm}
+\large
+Victor Artois, Cédric Hannotier, Mathieu Petitjean\\ 
+\end{center}
+
+
+\vspace{\stretch{2}}
+
+\begin{minipage}[t]{\textwidth}
+\normalsize \textbf{ELEC-H415}: Communication Channels\\[1.5ex]
+\end{minipage}
+}
+
+\end{titlepage}
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+%\thispagestyle{plain}
+\setcounter{page}{1}
+\section{Introduction}
+\input{sections/intro.tex}
+
+\iffalse
+\section{Simulation ideas}
+\begin{itemize}
+    \item Fast-fading: simulate a $500\times500$ metallic box and analyze power repartition in various 30x30 regions (see statement).
+    \item Check the Friis free-space attenuation in $\frac{\lambda}{d^2}$ (chap 2).
+    \item Build a knife-edge model and verify that ${\left | F(\nu) \right |}^2 \sim \frac{1}{2 \pi ^2 \nu ^2}$ (chap 3).
+    \item Body Area Network: study the propagation of waves around the human body for various frequencies.
+    \item Check the validity of the assumption that free-space attenuation can be considered if 60\% of the Fresnel ellipsoid is free of any obstacle (chap 5).
+    \item Build an array of 4 dipole antennas and observe beam forming (chap 6).
+    \item Build a panel antenna and observe radiation pattern (chap 6).
+    \item Build a parabolic antenna and visualize emission (chap 6).
+    \item Simulate propagation inside of a dielectric slab (chap 9).
+\end{itemize}
+\fi
+
+\section{2D FDTD algorithm}
+\input{sections/algo.tex}
+
+\section{Absorbing boundary conditions}
+\input{sections/abs.tex}
+
+\section{Harmonic source}
+\input{sections/hsource.tex}
+
+\section{Implementation}
+\input{sections/implementation.tex}
+
+\section{Validation}
+\input{sections/validation.tex}
+\end{document}

@@ -1,0 +1,15 @@
+A harmonic source can be simulated by imposing the value of the electrical field where it is located. The harmonic source equation is:
+\begin{equation}\label{eq:hsource:hsource}
+    E_z(t) = \cos(\omega t)
+\end{equation}
+In free space, $\omega$ can be rewritten as $\frac{2\pi c}{\lambda}$. To be able to implement the source in a discrete way, \eqref{eq:hsource:hsource} has to be written as a function of the spatial and temporal steps. Hence
+\begin{equation}\label{eq:hsource:nlambda}
+    \lambda = N_\lambda \Delta x\qquad \qquad t=n\Delta t
+\end{equation}
+$N_\lambda$ being the \emph{number of points per wavelength}. Using \eqref{eq:hsource:nlambda}, the harmonic source equation becomes
+\begin{align}
+    E_z^n &= \cos\left(\frac{2\pi c\Delta t}{N_\lambda \Delta x}n\right) \label{eq:hsource:hdelta}\\
+    &= \cos\left(\frac{2\pi S_c}{N_\lambda}n\right) \label{eq:hsource:hsc}
+\end{align}
+
+Equation \eqref{eq:hsource:hsc} will be used instead of \eqref{eq:hsource:hdelta} to make it independent of $\Delta x$ and $\Delta t$.

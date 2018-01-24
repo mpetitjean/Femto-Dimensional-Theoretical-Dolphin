@@ -1,0 +1,40 @@
+\subsection{Stability}\label{subsec:im:stab}
+In order to guarantee the FDTD stability in 2D, a restriction on $\Delta t$ has to be done:
+\begin{equation}\label{Screstrict}
+    \Delta t \leq \frac{\Delta x}{c\sqrt{2}}
+\end{equation}
+Equation \eqref{Screstrict} can be interpreted as the impossibility of propagating the energy at more than one spatial step by time step.
+
+To ensure FDTD stability whatever the simulation, $\Delta x$ and $\Delta t$ will not be explicitly defined. Instead, the ratio between them $S_c$ is used. Hence, $S_c=\frac{1}{\sqrt{2}}$.
+
+\subsection{Main loop}
+
+The main loop of the code is shown below. All functions are initialized, then the time stepping is performed.
+{\setstretch{0.75}
+\inputminted{c}{codes/tmzdemo1.c}}
+
+\subsection{Fields update}\label{sec:codefields}
+
+The following code updates the fields of the grid at each iteration, using equations (\ref{eq:updateHx}) to (\ref{eq:update2}).
+
+{\setstretch{0.75}
+\inputminted{c}{codes/updatetmz.c}}
+
+The coefficients used in the previous code were initialised as arrays in the function \texttt{gridInit}. A shorthand notation is used: for example, \texttt{Chxh} is the coefficient multiplying $H$ when updating $H_x$.
+
+{\setstretch{0.75}
+\inputminted{c}{codes/gridtmz.c}}
+
+\subsection{Absorbing boundary conditions}
+
+The following code performs the update equation (\ref{eq:abc2}) at the boundaries of the grid. First, macros are defined to easily access the stored values of the field and the coefficients are computed in the initialisation function. At each iteration, the new values of the field are computed and then stored in order to perform the next computation.
+
+{\setstretch{0.75}
+\inputminted{c}{codes/abctmz.c}}
+
+\subsection{Harmonic source}
+
+The value of the electric field on the points where an harmonic source is present is imposed by the following code, according to Equation \ref{eq:hsource:hsc}.
+
+{\setstretch{0.75}
+\inputminted{c}{codes/harmonic.c}}
